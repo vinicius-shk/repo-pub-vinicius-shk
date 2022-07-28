@@ -29,7 +29,7 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const { storeEmail } = this.props;
     return (
-      <>
+      <form>
         <label htmlFor="email">
           Email
           <input
@@ -64,7 +64,7 @@ class Login extends React.Component {
             Entrar
           </button>
         </Link>
-      </>
+      </form>
     );
   };
 
