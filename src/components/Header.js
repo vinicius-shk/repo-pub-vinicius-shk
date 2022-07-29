@@ -8,7 +8,6 @@ class Header extends Component {
     let total = 0;
     expenses.forEach((expense) => {
       const { currency, value, exchangeRates } = expense;
-      console.log(Object.values(exchangeRates));
       const coinData = Object.values(exchangeRates)
         .find((coin) => currency === coin.code);
       total += Number((parseFloat(coinData.ask) * parseFloat(value)).toFixed(2));
