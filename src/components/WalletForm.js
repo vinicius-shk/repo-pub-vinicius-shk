@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchAPI } from '../redux/actions';
+import { fetchApiKeys } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -10,6 +10,10 @@ class WalletForm extends Component {
     this.state = {
       value: '',
       description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+      id: 0,
     };
   }
 
@@ -21,8 +25,8 @@ class WalletForm extends Component {
   handleChange = ({ target: { name, value } }) => this.setState({ [name]: value })
 
   renderWalletForm = () => {
-    const { value, description } = this.state;
-    const { currencies } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    const { currencies, propsFetchAPI } = this.props;
     return (
       <form>
         <label htmlFor="value">
@@ -45,23 +49,51 @@ class WalletForm extends Component {
             onChange={ this.handleChange }
           />
         </label>
-        <select data-testid="currency-input">
+        <select
+          data-testid="currency-input"
+          value={ currency }
+          name="currency"
+          onChange={ this.handleChange }
+        >
           { currencies
             .map((coin, index) => (
               <option key={ `${coin}-${index}` }>{coin}</option>))}
         </select>
-        <select data-testid="method-input">
+        <select
+          data-testid="method-input"
+          value={ method }
+          name="method"
+          onChange={ this.handleChange }
+        >
           <option>Dinheiro</option>
           <option>Cartão de crédito</option>
           <option>Cartão de débito</option>
         </select>
-        <select data-testid="tag-input">
+        <select
+          data-testid="tag-input"
+          value={ tag }
+          name="tag"
+          onChange={ this.handleChange }
+        >
           <option>Alimentação</option>
           <option>Lazer</option>
           <option>Saúde</option>
           <option>Trabalho</option>
           <option>Transporte</option>
         </select>
+        <button
+          type="button"
+          onClick={ () => {
+            propsFetchAPI(this.state);
+            this.setState((prevState) => ({
+              id: prevState.id + 1,
+              value: '',
+              description: '',
+            }));
+          } }
+        >
+          Adicionar despesa
+        </button>
       </form>
     );
   }
@@ -73,7 +105,7 @@ class WalletForm extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  propsFetchAPI: () => dispatch(fetchAPI()),
+  propsFetchAPI: (task = false) => dispatch(fetchApiKeys(task)),
 });
 
 const mapStateToProps = ({ wallet: { currencies, loading } }) => ({
