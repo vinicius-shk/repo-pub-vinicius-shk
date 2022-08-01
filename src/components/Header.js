@@ -27,7 +27,7 @@ class Header extends Component {
         <span
           data-testid="total-field"
         >
-          { expenses.length === 0 ? 0 : this.totalValueBrl() }
+          { expenses.length === 0 ? '0.00' : this.totalValueBrl() }
         </span>
         <span
           data-testid="header-currency-field"

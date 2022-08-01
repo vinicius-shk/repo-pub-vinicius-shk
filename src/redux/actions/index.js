@@ -1,6 +1,7 @@
 export const USER = 'USER';
 export const WALLET = 'WALLET';
 export const COIN = 'COIN';
+export const DELETE = 'DELETE';
 
 export const userAction = (payload) => ({
   type: USER,
@@ -14,6 +15,11 @@ export const coinAction = (payload) => ({
 
 export const walletAction = (payload) => ({
   type: WALLET,
+  payload,
+});
+
+export const deleteAction = (payload) => ({
+  type: DELETE,
   payload,
 });
 
