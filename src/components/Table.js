@@ -4,28 +4,56 @@ import PropTypes from 'prop-types';
 
 class Table extends Component {
   renderTable = () => {
-    const { wallet } = this.props;
-    console.log(wallet);
+    const { wallet: { expenses } } = this.props;
+    const valuesExpenses = Object.values(expenses);
+    console.log(expenses);
     return (
-      <table>
-        <caption>Lista de despesas</caption>
-        <tr>
-          <th scope="col">Descrição</th>
-          <th scope="col">Tag</th>
-          <th scope="col">Método de pagamento</th>
-          <th scope="col">Valor</th>
-          <th scope="col">Moeda</th>
-          <th scope="col">Câmbio utilizado</th>
-          <th scope="col">Valor convertido</th>
-          <th scope="col">Moeda de conversão</th>
-          <th scope="col">Editar/Excluir</th>
-        </tr>
-      </table>
+      <>
+        { valuesExpenses
+          .map(({ currency, exchangeRates, id, description, tag, method, value }) => (
+            <tr key={ `${currency}-${id}` }>
+              <td>{ description }</td>
+              <td>{ tag }</td>
+              <td>{ method }</td>
+              <td>{ Number(value).toFixed(2) }</td>
+              <td>{exchangeRates[currency].name}</td>
+              <td>{Number(exchangeRates[currency].ask).toFixed(2)}</td>
+              <td>
+                {
+                  (parseFloat(exchangeRates[currency].ask) * parseFloat(value)).toFixed(2)
+                }
+              </td>
+              <td>Real</td>
+              <td>teste</td>
+            </tr>
+          )) }
+      </>
     );
   }
 
   render() {
-    return this.renderTable();
+    const { wallet: { expenses } } = this.props;
+    return (
+      <table>
+        <caption>Lista de despesas</caption>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Tag</th>
+            <th>Método de pagamento</th>
+            <th>Valor</th>
+            <th>Moeda</th>
+            <th>Câmbio utilizado</th>
+            <th>Valor convertido</th>
+            <th>Moeda de conversão</th>
+            <th>Editar/Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          { expenses.length !== 0 && this.renderTable()}
+        </tbody>
+      </table>
+    );
   }
 }
 
