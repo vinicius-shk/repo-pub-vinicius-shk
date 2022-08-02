@@ -24,7 +24,7 @@ describe('Conjunto de testes do TrybeWallet', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('Deveria habilitar o botão em login válido e levar para o path /carteira', () => {
+  it('Deveria habilitar o botão em login válido e levar para o path /carteira e ter renderização condicional', () => {
     const { history } = renderWithRouterAndRedux(<App />);
     const emailInput = screen.getByTestId('email-input');
     const button = screen.getByRole('button', { name: /entrar/i, })
@@ -34,6 +34,6 @@ describe('Conjunto de testes do TrybeWallet', () => {
     userEvent.type(passwordInput, '123456')
     expect(button).not.toBeDisabled();
     userEvent.click(button);
-    expect(history.location.pathname).toBe('/carteira')
+    expect(history.location.pathname).toBe('/carteira');
   });
 });
