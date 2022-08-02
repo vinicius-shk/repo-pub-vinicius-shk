@@ -23,16 +23,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: [
         ...state.expenses,
         action.payload,
-      ].sort((a, b) => {
-        const falsy = -1;
-        if (a.id > b.id) {
-          return 1;
-        }
-        if (a.id < b.id) {
-          return falsy;
-        }
-        return 0;
-      }),
+      ].sort((a, b) => a.id - b.id),
     };
   case DELETE:
     return {
