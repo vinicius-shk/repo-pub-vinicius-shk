@@ -2,6 +2,7 @@ export const USER = 'USER';
 export const WALLET = 'WALLET';
 export const COIN = 'COIN';
 export const DELETE = 'DELETE';
+export const SET_EDIT = 'SET_EDIT';
 
 export const userAction = (payload) => ({
   type: USER,
@@ -23,7 +24,12 @@ export const deleteAction = (payload) => ({
   payload,
 });
 
-export const fetchApiKeys = (task) => async (dispatch) => {
+export const setEditAction = (payload) => ({
+  type: SET_EDIT,
+  payload,
+});
+
+export const fetchAPI = (task) => async (dispatch) => {
   try {
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
     const data = await response.json();

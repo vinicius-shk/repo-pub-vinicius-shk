@@ -12,6 +12,7 @@ class Header extends Component {
         .find((coin) => currency === coin.code);
       total += Number((parseFloat(coinData.ask) * parseFloat(value)).toFixed(2));
     });
+    // Regex retirado do StackOverflow para retirada de zeros a esquerda.
     return total.toString().replace(/^0+/, '');
   }
 

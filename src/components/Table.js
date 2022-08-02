@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteAction } from '../redux/actions';
+import { deleteAction, setEditAction } from '../redux/actions';
 
 class Table extends Component {
-  handleClick = ({ target: { id } }) => {
-    const { deleteTask, wallet: { expenses } } = this.props;
-    console.log(expenses, id);
+  handleClick = async ({ target: { id, name } }) => {
+    const { deleteTask, setEditTask, wallet: { expenses } } = this.props;
+    if (name === 'Editar') {
+      await setEditTask(Number(id));
+    }
     const newList = expenses.filter((expense) => expense.id !== Number(id));
     deleteTask(newList);
   }
@@ -37,8 +39,18 @@ class Table extends Component {
                   type="button"
                   id={ id }
                   onClick={ this.handleClick }
+                  name="Excluir"
                 >
-                  Deletar despesa
+                  Excluir
+                </button>
+                <button
+                  data-testid="edit-btn"
+                  type="button"
+                  id={ id }
+                  onClick={ this.handleClick }
+                  name="Editar"
+                >
+                  Editar
                 </button>
               </td>
             </tr>
@@ -79,10 +91,13 @@ const mapStateToProps = ({ wallet }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteTask: (task) => dispatch(deleteAction(task)),
+  setEditTask: (id) => dispatch(setEditAction(id)),
 });
 
 Table.propTypes = {
   wallet: PropTypes.object,
+  deleteTask: PropTypes.func,
+  editTask: PropTypes.func,
 }.isRequired;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
