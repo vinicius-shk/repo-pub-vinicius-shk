@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { userAction } from '../redux/actions';
 
+import logo from './logoTrybe.png';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -29,47 +31,57 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const { storeEmail } = this.props;
     return (
-      <form>
-        <label htmlFor="email">
-          Email
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={ email }
-            data-testid="email-input"
-            placeholder="digite seu email"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="password">
-          Password
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={ password }
-            data-testid="password-input"
-            minLength={ 6 }
-            placeholder="digite sua senha"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <Link to="/carteira">
-          <button
-            type="button"
-            disabled={ this.loginValidation() }
-            onClick={ () => storeEmail(email) }
-          >
-            Entrar
-          </button>
-        </Link>
-      </form>
+      <div className="container_logform">
+        <img src={ logo } alt="Trybe logo" className="loginLogo" />
+        <h1>Login</h1>
+        <form className="loginForm">
+          <label htmlFor="email">
+            Email:
+            { ' ' }
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value={ email }
+              data-testid="email-input"
+              placeholder="digite seu email"
+              onChange={ this.handleChange }
+            />
+            <small>Seus dados nunca serão compartilhados</small>
+          </label>
+          <label htmlFor="password">
+            Password:
+            { ' ' }
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={ password }
+              data-testid="password-input"
+              minLength={ 6 }
+              placeholder="digite sua senha"
+              onChange={ this.handleChange }
+            />
+          </label>
+          <div className="container_button">
+            <Link to="/carteira">
+              <button
+                type="button"
+                disabled={ this.loginValidation() }
+                onClick={ () => storeEmail(email) }
+                className="loginBtn"
+              >
+                Entrar
+              </button>
+            </Link>
+          </div>
+        </form>
+      </div>
     );
   };
 
   render() {
-    return this.renderLogin();
+    return <div className="container">{ this.renderLogin() }</div>;
   }
 }
 

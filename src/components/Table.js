@@ -34,24 +34,28 @@ class Table extends Component {
               </td>
               <td>Real</td>
               <td>
-                <button
-                  data-testid="delete-btn"
-                  type="button"
-                  id={ id }
-                  onClick={ this.handleClick }
-                  name="Excluir"
-                >
-                  Excluir
-                </button>
-                <button
-                  data-testid="edit-btn"
-                  type="button"
-                  id={ id }
-                  onClick={ this.handleClick }
-                  name="Editar"
-                >
-                  Editar
-                </button>
+                <div className="formBtnContainer">
+                  <button
+                    data-testid="delete-btn"
+                    type="button"
+                    id={ id }
+                    onClick={ this.handleClick }
+                    name="Excluir"
+                    className="delBtn"
+                  >
+                    Excluir
+                  </button>
+                  <button
+                    data-testid="edit-btn"
+                    type="button"
+                    id={ id }
+                    onClick={ this.handleClick }
+                    name="Editar"
+                    className="editBtn"
+                  >
+                    Editar
+                  </button>
+                </div>
               </td>
             </tr>
           )) }
@@ -65,7 +69,7 @@ class Table extends Component {
       <table>
         <caption>Lista de despesas</caption>
         <thead>
-          <tr>
+          <tr className="thHeader">
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>

@@ -1,41 +1,177 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: linear-gradient(to bottom, rgb(21, 20, 20), rgb(177, 173, 173));
+  --red: rgba(240, 156, 150, 0.398);
+  --header: rgba(12, 142, 36, 0.698);
+  --shadow: 1px 2px 8px 1px rgba(0,0,0,0.85);
+  --blue: rgba(96, 150, 196, 0.632);
+}
+
+small {
+  display: block;
+  padding-top: 3px;
+}
+
+table {
+  border-collapse: collapse;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+tr:not(.thHeader):hover {
+  background-color: rgba(179, 68, 68, 0.115)
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+th, td {
+  border: 1px solid;
+  color: #ccc;
+  padding: 1%;
 }
 
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
+select {
+  color: antiquewhite;
+  background-color: rgb(21, 20, 20);
+  transition: .4s;
+}
+
+select:focus {
+  color: rgb(21, 20, 20);
+  background-color: rgb(177, 173, 173);
+}
+
+header {
+  background-color: var(--header);
+  padding: 1%;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  align-items: center;
+}
+
+input[type=password], input[type=email], input[type=text] {
+  border: 3px solid #ccc;
+  padding: 1.5%;
+  outline: none;
+  transition: 0.7s;
+}
+
+input[type=password]:focus, input[type=email]:focus, input[type=text]:focus {
+  border: 3px solid rgb(31, 31, 31);
+  padding: 4.5%;
+}
+
+.container_button {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 5%;
+}
+
+.container {
+  display: flex;
   min-height: 100vh;
+  min-width: 100vh;
+  background-image: var(--bg);
+  justify-content: center;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.formBtnContainer {
+  display: flex;
+  justify-content: space-around;
 }
 
-@keyframes App-logo-spin {
+.delBtn, .editBtn {
+  padding: 2% 2%;
+  box-shadow: var(--shadow);
+  color: antiquewhite;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.editBtn {
+  background-color: var(--blue);
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.delBtn {
+  background-color: var(--red);
+}
+
+.container_wallet {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  background-image: var(--bg);
+  color: antiquewhite;
+}
+
+.container_logform {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-end;
+  align-content: space-around;
+  align-items: flex-start; 
+  padding-bottom: 1%;
+  border-radius: 10px;
+  gap: 5px;
+  width: 15%;
+}
+
+.container_logform h1 {
+  text-align: center;
+  padding: 3%;
+}
+
+.container_walletform {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 1%;
+  width: 100%;
+}
+
+.headerLogo {
+  width: 10%;
+  border-radius: 12px;
+}
+
+.loginLogo {
+  width: 100%;
+  filter: contrast(150%);
+  padding-bottom: 25%;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginForm {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 60%;
+  padding: 1%;
+  border-radius: 15px;
+  gap: 1rem;
+}
+
+.loginBtn {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background-color: gray;
+  color: antiquewhite;
+  box-shadow: var(--shadow);
+}
+
+.loginBtn:disabled {
+  background-color: var(--red);
+  transition: .3s;
+}
+
+.loginBtn:enabled {
+  background-color: var(--blue);
+  transition: .3s;
 }

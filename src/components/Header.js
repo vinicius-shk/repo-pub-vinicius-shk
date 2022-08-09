@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import logo from './icontrybe.jpg';
+
 class Header extends Component {
   totalValueBrl = () => {
     const { expenses } = this.props;
@@ -23,18 +25,28 @@ class Header extends Component {
         <span
           data-testid="email-field"
         >
+          Email:
+          { ' ' }
           { email }
         </span>
-        <span
-          data-testid="total-field"
-        >
-          { expenses.length === 0 ? '0.00' : this.totalValueBrl() }
-        </span>
-        <span
-          data-testid="header-currency-field"
-        >
-          BRL
-        </span>
+        <div className="logoContainer">
+          <img src={ logo } alt="Trybe icon" className="headerLogo" />
+          <span>TrybeWallet</span>
+        </div>
+        <div>
+          <span
+            data-testid="total-field"
+          >
+            Total:
+            { ' ' }
+            { expenses.length === 0 ? '0.00' : this.totalValueBrl() }
+          </span>
+          <span
+            data-testid="header-currency-field"
+          >
+            BRL
+          </span>
+        </div>
       </header>
     );
   }

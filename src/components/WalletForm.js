@@ -28,11 +28,12 @@ class WalletForm extends Component {
     const { value, description, currency, method, tag } = this.state;
     const { currencies, propsFetchAPI, editor, idToEdit } = this.props;
     return (
-      <form>
+      <form className="container_walletform">
         <label htmlFor="value">
           Valor:
           <input
             data-testid="value-input"
+            type="text"
             id="value"
             name="value"
             value={ value }
@@ -43,6 +44,7 @@ class WalletForm extends Component {
           Descrição:
           <input
             data-testid="description-input"
+            type="text"
             id="description"
             name="description"
             value={ description }
@@ -83,6 +85,7 @@ class WalletForm extends Component {
         </select>
         <button
           type="button"
+          className="loginBtn"
           onClick={ () => {
             if (editor) {
               const edit = {
@@ -112,7 +115,7 @@ class WalletForm extends Component {
 
   render() {
     const { loading } = this.props;
-    return (loading ? <span>Loading...</span> : this.renderWalletForm());
+    return loading ? <span>Loading...</span> : this.renderWalletForm();
   }
 }
 
